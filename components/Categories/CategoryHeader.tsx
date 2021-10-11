@@ -28,9 +28,6 @@ const CategoryHeader = ({ category }: CategoryHeaderProps) => {
                 Подписаться
               </span>
             </button>
-            {/*<button>*/}
-            {/*  <img src="" alt="" />*/}
-            {/*</button>*/}
           </div>
         </div>
         <div className="ml-4 mr-5">

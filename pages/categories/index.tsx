@@ -1,9 +1,14 @@
 import React from "react";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
-import { CategoryCard } from "../../components";
+import { CategoryCard } from "components";
+import { Category } from "interfaces";
 
-const Categories = ({ categories }) => {
+interface CategoriesProps {
+  categories: Category[];
+}
+
+const Categories = ({ categories }: CategoriesProps) => {
   return (
     <>
       <Head>

@@ -1,10 +1,14 @@
-import { useRouter } from "next/router";
 import Head from "next/head";
 import React from "react";
-import { PostCard } from "../../../../components";
+import { PostCard } from "components";
+import { Category, Post } from "interfaces";
 
-const Post = ({ post, category }) => {
+interface PostProps {
+  post: Post;
+  category: Category;
+}
 
+const Post = ({ post, category }: PostProps) => {
   return (
     <>
       <Head>
@@ -39,5 +43,3 @@ export async function getServerSideProps({ query }) {
 }
 
 export default Post;
-
-

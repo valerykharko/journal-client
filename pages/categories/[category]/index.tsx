@@ -1,8 +1,13 @@
 import React from "react";
 import Head from "next/head";
-import { CategoryHeader, PostCard } from "../../../components";
+import { CategoryHeader, PostCard } from "components";
+import { Category } from "interfaces";
 
-const Index = ({ category }) => {
+interface CategoryPageProps {
+  category: Category;
+}
+
+const CategoryPage = ({ category }: CategoryPageProps) => {
   return (
     <>
       <Head>
@@ -160,7 +165,7 @@ const Index = ({ category }) => {
                   key={post.id}
                   post={post}
                   isInCategory
-                  category={false}
+                  category={category}
                 />
               ))}
             </div>
@@ -181,4 +186,4 @@ export async function getServerSideProps({ query }) {
   return { props: { category } };
 }
 
-export default Index;
+export default CategoryPage;
