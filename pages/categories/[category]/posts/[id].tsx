@@ -3,12 +3,12 @@ import React from "react";
 import { PostCard } from "components";
 import { Category, Post } from "interfaces";
 
-interface PostProps {
+interface PostPageProps {
   post: Post;
   category: Category;
 }
 
-const Post = ({ post, category }: PostProps) => {
+const PostPage = ({ post, category }: PostPageProps) => {
   return (
     <>
       <Head>
@@ -42,4 +42,4 @@ export async function getServerSideProps({ query }) {
   return { props: { post, category } };
 }
 
-export default Post;
+export default PostPage;

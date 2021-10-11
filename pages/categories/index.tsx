@@ -4,11 +4,11 @@ import { GetServerSideProps } from "next";
 import { CategoryCard } from "components";
 import { Category } from "interfaces";
 
-interface CategoriesProps {
+interface CategoriesPageProps {
   categories: Category[];
 }
 
-const Categories = ({ categories }: CategoriesProps) => {
+const CategoriesPage = ({ categories }: CategoriesPageProps) => {
   return (
     <>
       <Head>
@@ -37,4 +37,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default Categories;
+export default CategoriesPage;

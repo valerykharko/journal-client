@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { AppProps } from "next/app";
 import { Header } from "../components";
-import { wrapper } from "../store/store";
+import { wrapper } from "../store";
 
 import "../styles/globals.css";
 
