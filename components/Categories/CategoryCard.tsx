@@ -1,14 +1,18 @@
 import React from "react";
 import Router from "next/router";
-import Category from "@/interfaces/category";
+import { Category } from "interfaces";
+import { useActions } from "../../hooks/useActions";
 
 interface CategoryCardProps {
   category: Category;
 }
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
+  const { setActiveLink } = useActions();
+
   const onClickHandler = () => {
     Router.push(`/categories/${category.title}`);
+    setActiveLink(category.id);
   };
 
   return (

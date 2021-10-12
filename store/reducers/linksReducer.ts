@@ -1,7 +1,7 @@
 import { LinkState, LinkAction, LinkActionsTypes } from "interfaces/link";
 
 const initialState: LinkState = {
-  activeLink: 1,
+  activeLink: -1,
 };
 
 const linksReducer = (state = initialState, action: LinkAction): LinkState => {

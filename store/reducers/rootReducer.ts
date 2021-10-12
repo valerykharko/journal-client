@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { linksReducer, usersReducer, categoriesReducer, postsReducer } from ".";
+import { linksReducer, usersReducer } from ".";
 
 export const rootReducer = combineReducers({
   link: linksReducer,

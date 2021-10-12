@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { MenuItem } from "components";
 import { Category } from "interfaces";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActions";
 
 interface MenuProps {
   categories: Category[];
@@ -10,11 +12,8 @@ interface MenuProps {
 }
 
 const Menu = ({ categories, menuActive, setMenuActive }: MenuProps) => {
-  const [activeLink, setActiveLink] = useState(-1);
-
-  const onClickHandler = (number) => {
-    setActiveLink(number);
-  };
+  const { activeLink } = useTypedSelector((state) => state.link);
+  const { setActiveLink } = useActions();
 
   return (
     <>
@@ -37,7 +36,7 @@ const Menu = ({ categories, menuActive, setMenuActive }: MenuProps) => {
                   ? "flex flex-row flex-shrink-0 p-2 mb-2 bg-white w-48 h-12 rounded-xl cursor-pointer"
                   : "flex flex-row flex-shrink-0 p-2 mb-2 w-48 h-12 rounded-xl cursor-pointer hover:bg-white opacity-75"
               }
-              onClick={() => onClickHandler(-1)}
+              onClick={() => setActiveLink(-1)}
             >
               <div className="flex items-center justify-center ml-2">
                 <img
@@ -58,7 +57,7 @@ const Menu = ({ categories, menuActive, setMenuActive }: MenuProps) => {
                   ? "flex flex-row flex-shrink-0 p-2 mb-5 bg-white w-48 h-12 rounded-xl cursor-pointer"
                   : "flex flex-row flex-shrink-0 p-2 mb-5 w-48 h-12 rounded-xl cursor-pointer hover:bg-white opacity-75"
               }
-              onClick={() => onClickHandler(0)}
+              onClick={() => setActiveLink(0)}
             >
               <div className="flex items-center justify-center ml-2">
                 <img
@@ -74,12 +73,7 @@ const Menu = ({ categories, menuActive, setMenuActive }: MenuProps) => {
           </Link>
           <div>
             {categories.map((category) => (
-              <MenuItem
-                key={category.id}
-                item={category}
-                activeLink={activeLink}
-                onClickHandler={onClickHandler}
-              />
+              <MenuItem key={category.id} item={category} />
             ))}
           </div>
         </div>
