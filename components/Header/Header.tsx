@@ -1,21 +1,30 @@
 import React, { FC, useEffect, useState } from "react";
 import Router from "next/router";
 import { Menu } from "components";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import ProfileInfo from "components/Profile/ProfileInfo";
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState(false);
+  const [infoActive, setInfoActive] = useState(false);
   const [categories, setCategories] = useState([]);
+
+  const { user, isAuth } = useTypedSelector((state) => state.user);
 
   const handlerOfMenu = () => {
     setMenuActive(!menuActive);
   };
 
-  const onImageHandler = () => {
-    Router.push("/");
+  const onImageHandler = async () => {
+    await Router.push("/");
   };
 
-  const onAuthHandler = () => {
-    Router.push("/auth/login");
+  const onAuthHandler = async () => {
+    await Router.push("/auth/login");
+  };
+
+  const onAvatarHandler = () => {
+    setInfoActive(!infoActive);
   };
 
   useEffect(() => {
@@ -49,7 +58,7 @@ const Header: FC = () => {
           </div>
           <div className="flex justify-center items-center ml-6">
             <input
-              className="rounded h-10 p-4 pl-9 bg-search bg-16 bg-no-repeat bg-left bg-left-center"
+              className="rounded-lg text-base h-10 pr-2 pl-12 bg-search bg-16 bg-no-repeat bg-left bg-left-center focus:outline-none focus:border focus:border-2 focus:border-blue-900"
               placeholder="Поиск"
             />
           </div>
@@ -60,12 +69,35 @@ const Header: FC = () => {
           </div>
         </div>
         <div className="flex justify-items-end items-center mr-8">
-          <img
-            className="w-8 mr-2"
-            src={"/images/avatar-icon.png"}
-            alt="avatar-icon"
-          />
-          <button onClick={() => onAuthHandler()}>Войти</button>
+          {isAuth ? (
+            <div
+              className="flex justify-center items-center mr-4 cursor-pointer"
+              onClick={onAvatarHandler}
+            >
+              <img
+                className="mr-2 w-12 h-12 rounded-xl"
+                src={`${process.env.API_URL}` + user.avatar.url}
+                alt={user.avatar.name}
+              />
+              <img
+                className="w-4"
+                src={"/images/arrow-down-icon.png"}
+                alt={user.avatar.name}
+              />
+            </div>
+          ) : (
+            <button
+              className="flex justify-center items-center p-2 mr-4 rounded-xl hover:bg-blue-100"
+              onClick={() => onAuthHandler()}
+            >
+              <img
+                className="w-10 mr-2"
+                src={"/images/programmer.png"}
+                alt="programmer.png"
+              />
+              <span className="text-lg font-semibold">Войти</span>
+            </button>
+          )}
         </div>
       </div>
       <Menu
@@ -73,6 +105,7 @@ const Header: FC = () => {
         setMenuActive={setMenuActive}
         categories={categories}
       />
+      <ProfileInfo infoActive={infoActive} setInfoActive={setInfoActive} />
     </>
   );
 };

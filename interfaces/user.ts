@@ -15,6 +15,7 @@ export interface UserState {
 
 export enum UserActionsTypes {
   SET_USER = "SET_USER",
+  SET_AUTH = "SET_AUTH",
 }
 
 interface SetUser {
@@ -22,4 +23,9 @@ interface SetUser {
   payload: User;
 }
 
-export type UserAction = SetUser;
+interface SetAuth {
+  type: UserActionsTypes.SET_AUTH;
+  payload: boolean;
+}
+
+export type UserAction = SetUser | SetAuth;

@@ -8,7 +8,9 @@ const initialState: UserState = {
 const usersReducer = (state = initialState, action: UserAction): UserState => {
   switch (action.type) {
     case UserActionsTypes.SET_USER:
-      return { ...state, user: action.payload, isAuth: true };
+      return { ...state, user: action.payload };
+    case UserActionsTypes.SET_AUTH:
+      return { ...state, isAuth: action.payload };
     default:
       return state;
   }

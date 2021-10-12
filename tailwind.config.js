@@ -11,7 +11,7 @@ module.exports = {
         16: "1.3rem",
       },
       backgroundPosition: {
-        "left-center": "left 0.5rem center ",
+        "left-center": "left 1rem center ",
       },
     },
     flex: {

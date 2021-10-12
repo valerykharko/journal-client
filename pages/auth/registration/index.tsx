@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { RegistrationBlock } from "components";
+import {GetServerSideProps} from "next";
 
 const Registration = () => {
   return (
