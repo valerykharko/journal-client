@@ -6,3 +6,5 @@ export { default as CategoryHeader } from "./Categories/CategoryHeader";
 export { default as PostCard } from "./Posts/PostCard";
 export { default as LoginBlock } from "./Auth/LoginBlock";
 export { default as RegistrationBlock } from "./Auth/RegistrationBlock";
+export { default as ProfileHeader } from "./Profile/ProfileHeader";
+export { default as ProfileInfo } from "./Profile/ProfileInfo";

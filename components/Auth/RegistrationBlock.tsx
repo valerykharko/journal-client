@@ -15,16 +15,35 @@ const RegistrationBlock = () => {
       <div className="flex justify-center items-center">
         <div className="w-2/3 bg-white p-8 rounded-2xl">
           <div className="flex flex-col">
-            <span className="text-base">First name</span>
+            <span className="text-base">Username</span>
             <input
               className="p-2 mt-1 h-10 border-2 border-gray-400 rounded-md focus:outline-none focus:border-2 focus:ring-1 focus:ring-purple-200 focus:border-purple-400"
               type="text"
             />
-            <span className="mt-6 text-base">Last name</span>
-            <input
-              className="p-2 mt-1 h-10 border-2 border-gray-400 rounded-md focus:outline-none focus:border-2 focus:ring-1 focus:ring-purple-200 focus:border-purple-400"
-              type="text"
-            />
+            <div className="flex flex-col mt-6">
+              <div className="flex">
+                <div className="flex-50">
+                  <span className="text-base">First name</span>
+                </div>
+                <div className="flex-50">
+                  <span className="text-base">Last name</span>
+                </div>
+              </div>
+              <div className="flex">
+                <div className="flex-50">
+                  <input
+                    className="p-2 mt-1 h-10 border-2 border-gray-400 rounded-md focus:outline-none focus:border-2 focus:ring-1 focus:ring-purple-200 focus:border-purple-400"
+                    type="text"
+                  />
+                </div>
+                <div className="flex-50">
+                  <input
+                    className="p-2 mt-1 h-10 border-2 border-gray-400 rounded-md focus:outline-none focus:border-2 focus:ring-1 focus:ring-purple-200 focus:border-purple-400"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
             <span className="mt-6 text-base">Email address</span>
             <input
               className="p-2 mt-1 h-10 border-2 border-gray-400 rounded-md focus:outline-none focus:border-2 focus:ring-1 focus:ring-purple-200 focus:border-purple-400"

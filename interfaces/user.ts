@@ -2,14 +2,16 @@ import { Image } from "interfaces";
 
 export interface User {
   id: number;
-  firstName: number;
-  secondName: number;
+  username: string;
+  firstName: string;
+  secondName: string;
   email: string;
   avatar: Image;
+  created_at: string;
 }
 
 export interface UserState {
-  user: User | null;
+  user: User | undefined;
   isAuth: boolean;
 }
 

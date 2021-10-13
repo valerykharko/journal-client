@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import Router from "next/router";
 import { useActions } from "../../hooks/useActions";
 
 interface ProfileInfoProps {
@@ -12,8 +12,11 @@ const ProfileInfo = ({ infoActive, setInfoActive }: ProfileInfoProps) => {
   const { setUser, setAuth } = useActions();
 
   const logout = () => {
+    Router.push("/");
     setUser(null);
     setAuth(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setInfoActive(false);
   };
 

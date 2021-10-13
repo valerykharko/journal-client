@@ -1,18 +1,32 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Router from "next/router";
-import { Menu } from "components";
+import { Menu, ProfileInfo } from "components";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import ProfileInfo from "components/Profile/ProfileInfo";
+import { setUser } from "../../store/actions/users";
+import { useActions } from "../../hooks/useActions";
+import { getUser } from "../../pages/api/user";
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState(false);
   const [infoActive, setInfoActive] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  const popupRef = useRef();
+  const ownerPopupRef = useRef();
+
   const { user, isAuth } = useTypedSelector((state) => state.user);
+  const { setUser, setAuth } = useActions();
 
   const handlerOfMenu = () => {
     setMenuActive(!menuActive);
+  };
+
+  const handleOutSideClick = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    console.log(path);
+    if (!path.includes(popupRef.current && ownerPopupRef.current)) {
+      setInfoActive(false);
+    }
   };
 
   const onImageHandler = async () => {
@@ -28,6 +42,21 @@ const Header: FC = () => {
   };
 
   useEffect(() => {
+    async function checkAuth() {
+      // if (localStorage.getItem("token")) {
+      //   // const data = await getUser();
+      //   // if (data) {
+      //   //   setUser(data);
+      //   //   setAuth(true);
+      //   // }
+      // }
+      if (localStorage.getItem("user") && localStorage.getItem("token")) {
+        setUser(JSON.parse(localStorage.getItem("user")));
+        setAuth(true);
+      }
+    }
+    checkAuth();
+
     async function getCategories() {
       const categories = await fetch("http://localhost:1337/categories").then(
         (response) => response.json()
@@ -35,6 +64,8 @@ const Header: FC = () => {
       setCategories(categories);
     }
     getCategories();
+
+    document.body.addEventListener("click", handleOutSideClick);
   }, []);
 
   return (
@@ -58,7 +89,7 @@ const Header: FC = () => {
           </div>
           <div className="flex justify-center items-center ml-6">
             <input
-              className="rounded-lg text-base h-10 pr-2 pl-12 bg-search bg-16 bg-no-repeat bg-left bg-left-center focus:outline-none focus:border focus:border-2 focus:border-blue-900"
+              className="rounded-lg text-base h-10 pr-2 pl-12 bg-search bg-16 bg-no-repeat bg-left bg-left-center focus:outline-none focus:ring focus:ring-blue-400"
               placeholder="Поиск"
             />
           </div>
@@ -71,18 +102,27 @@ const Header: FC = () => {
         <div className="flex justify-items-end items-center mr-8">
           {isAuth ? (
             <div
-              className="flex justify-center items-center mr-4 cursor-pointer"
+              ref={ownerPopupRef}
+              className="flex justify-center items-center mr-4 cursor-pointer hover:scale-95"
               onClick={onAvatarHandler}
             >
-              <img
-                className="mr-2 w-12 h-12 rounded-xl"
-                src={`${process.env.API_URL}` + user.avatar.url}
-                alt={user.avatar.name}
-              />
+              {user.avatar ? (
+                <img
+                  className="mr-2 w-12 h-12 rounded-xl"
+                  src={`${process.env.API_URL}` + user.avatar.url}
+                  alt={user.avatar.name}
+                />
+              ) : (
+                <img
+                  className="mr-2 w-12 h-12 rounded-xl"
+                  src={"/images/user.png"}
+                  alt="user"
+                />
+              )}
               <img
                 className="w-4"
                 src={"/images/arrow-down-icon.png"}
-                alt={user.avatar.name}
+                alt="arrow-down-icon"
               />
             </div>
           ) : (
@@ -105,7 +145,9 @@ const Header: FC = () => {
         setMenuActive={setMenuActive}
         categories={categories}
       />
-      <ProfileInfo infoActive={infoActive} setInfoActive={setInfoActive} />
+      <div ref={popupRef}>
+        <ProfileInfo infoActive={infoActive} setInfoActive={setInfoActive} />
+      </div>
     </>
   );
 };
