@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import { linksReducer, usersReducer } from ".";
+import { categoriesReducer, linksReducer, usersReducer } from ".";
 
 export const rootReducer = combineReducers({
   link: linksReducer,
   user: usersReducer,
-  // categories: categoriesReducer,
+  categories: categoriesReducer,
   // posts: postsReducer,
 });
 

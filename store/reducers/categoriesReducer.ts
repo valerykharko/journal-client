@@ -1,30 +1,26 @@
-// const initialState: TodoState = {
-//   todos: [],
-//   page: 1,
-//   error: null,
-//   limit: 10,
-//   loading: false,
-// };
-//
-// const categoriesReducer = (
-//   state = initialState,
-//   action: TodoAction
-// ): TodoState => {
-//   switch (action.type) {
-//     case TodoActionsTypes.FETCH_TODOS:
-//       return {
-//         ...state,
-//         loading: true,
-//       };
-//     case TodoActionsTypes.FETCH_TODOS_SUCCESS:
-//       return { ...state, loading: false, todos: action.payload };
-//     case TodoActionsTypes.FETCH_TODOS_ERROR:
-//       return { ...state, loading: false, error: action.payload };
-//     case TodoActionsTypes.SET_TODO_PAGE:
-//       return { ...state, page: action.payload };
-//     default:
-//       return state;
-//   }
-// };
-//
-// export default categoriesReducer;
+import {
+  CategoriesActionsTypes,
+  CategoryAction,
+  CategoryState,
+} from "interfaces/category";
+
+const initialState: CategoryState = {
+  categories: [],
+  category: undefined,
+};
+
+const categoriesReducer = (
+  state = initialState,
+  action: CategoryAction
+): CategoryState => {
+  switch (action.type) {
+    case CategoriesActionsTypes.FETCH_CATEGORIES:
+      return { ...state, categories: action.payload };
+    case CategoriesActionsTypes.FETCH_CATEGORY:
+      return { ...state, category: action.payload };
+    default:
+      return state;
+  }
+};
+
+export default categoriesReducer;

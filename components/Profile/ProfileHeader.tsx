@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Router from "next/router";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
@@ -10,13 +10,11 @@ const ProfileHeader = () => {
     { index: 3, link: "profile/notifications" },
     { index: 4, link: "profile/settings" },
   ];
-  const [activeLink, setActiveLink] = useState(0);
   const { user } = useTypedSelector((state) => state.user);
-  const date = new Date(user.created_at).toLocaleDateString();
+  const date = new Date(user?.created_at).toLocaleDateString();
 
   const onClickHandler = (activeLink) => {
     const route = routes.find((route) => route.index === activeLink).link;
-    console.log(route);
     Router.push(route);
   };
 
@@ -25,11 +23,11 @@ const ProfileHeader = () => {
       <div className="bg-white rounded-2xl p-4">
         <div className="flex justify-between items-start">
           <div>
-            {user.avatar ? (
+            {user?.avatar ? (
               <img
                 className="w-1/4 rounded-xl"
-                src={`${process.env.API_URL}` + user.avatar.url}
-                alt={user.avatar.name}
+                src={`${process.env.API_URL}` + user?.avatar.url}
+                alt={user?.avatar.name}
               />
             ) : (
               <img
@@ -54,10 +52,10 @@ const ProfileHeader = () => {
         </div>
         <div className="p-2 mt-2">
           <div className="text-3xl font-semibold">
-            {user.firstName} {user.secondName}
+            {user?.firstName} {user?.secondName}
           </div>
           <div className="mt-3 text-lg text-justify">
-            Username: {user.username}
+            Username: {user?.username}
           </div>
           <div className="mt-3 text-base text-justify">На проекте с {date}</div>
           <div className="mt-6">

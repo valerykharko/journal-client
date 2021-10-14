@@ -29,8 +29,9 @@ const CategoriesPage = ({ categories }: CategoriesPageProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await fetch(`${process.env.API_URL}/categories`);
-  const categories = await response.json();
+  const categories = await fetch(`${process.env.API_URL}/categories`).then(
+    (response) => response.json()
+  );
 
   return {
     props: { categories },

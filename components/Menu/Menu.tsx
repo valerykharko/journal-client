@@ -1,27 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { MenuItem } from "components";
-import { Category } from "interfaces";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActions";
 
 interface MenuProps {
-  categories: Category[];
   menuActive: boolean;
   setMenuActive: Function;
 }
 
-const Menu = ({ categories, menuActive, setMenuActive }: MenuProps) => {
+const Menu = ({ menuActive, setMenuActive }: MenuProps) => {
   const { activeLink } = useTypedSelector((state) => state.link);
-  const { setActiveLink } = useActions();
+  const { categories } = useTypedSelector((state) => state.categories);
+
+  const { setActiveLink, fetchCategories } = useActions();
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
     <>
       <div
         className={
           menuActive
-            ? "fixed pt-4 transform transition-all duration-300 w-1/5 h-2/5 translate-x-0"
-            : "fixed pt-4 transform -translate-x-full transition-all duration-300 w-1/5 h-2/5"
+            ? "z-20 fixed pt-4 transform transition-all duration-300 w-1/5 h-2/5 translate-x-0"
+            : "z-20 fixed pt-4 transform -translate-x-full transition-all duration-300 w-1/5 h-2/5"
         }
         onClick={() => setMenuActive(false)}
       >

@@ -11,9 +11,9 @@ interface ProfileInfoProps {
 const ProfileInfo = ({ infoActive, setInfoActive }: ProfileInfoProps) => {
   const { setUser, setAuth } = useActions();
 
-  const logout = () => {
-    Router.push("/");
-    setUser(null);
+  const logout = async () => {
+    await Router.push("/");
+    setUser(undefined);
     setAuth(false);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -29,8 +29,8 @@ const ProfileInfo = ({ infoActive, setInfoActive }: ProfileInfoProps) => {
       <div
         className={
           infoActive
-            ? "fixed right-0 bg-white rounded-xl transform transition-all duration-300 w-1/12 -translate-x-4"
-            : "fixed right-0 bg-white rounded-xl translate-x-full transition-all duration-300 w-1/12"
+            ? "fixed z-20 right-0 bg-white rounded-xl transform transition-all duration-300 w-1/12 -translate-x-4"
+            : "fixed z-20 right-0 bg-white rounded-xl translate-x-full transition-all duration-300 w-1/12"
         }
         onClick={() => setInfoActive(false)}
       >

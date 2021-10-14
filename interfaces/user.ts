@@ -11,7 +11,7 @@ export interface User {
 }
 
 export interface UserState {
-  user: User | undefined;
+  user: User;
   isAuth: boolean;
 }
 

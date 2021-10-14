@@ -1,7 +1,7 @@
 import { UserAction, UserActionsTypes, UserState } from "interfaces/user";
 
 const initialState: UserState = {
-  user: {},
+  user: undefined,
   isAuth: false,
 };
 
